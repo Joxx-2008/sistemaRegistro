@@ -97,6 +97,20 @@ void registrarNotas(string nombre[], double nota[], int &cantidad){
         return;
     }
 
+     
+    while(nota[cantidad] < 0 || nota[cantidad] > 20){
+
+        cout << "Ingrese una nota entre 0 y 20: ";
+        cin >> nota[cantidad];
+
+        if(cin.fail()){
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Ingrese una nota numerica valida" << endl;
+            nota[cantidad] = -1;
+        }
+    }
+
     cantidad++;
 
     cout << "Registro exitoso" << endl;
@@ -112,8 +126,17 @@ void mostrarReporte(string nombre[], double nota[], int cantidad){
     }
 
     for(int i = 0; i < cantidad; i++){
+        
         cout << "Nombre: " << nombre[i] << endl;
         cout << "Nota: " << nota[i] << endl;
+
+        if(nota[i] >= 14){
+            cout << "Estado: APROBADO" << endl;
+        } 
+        else{
+            cout << "Estado: REPROBADO" << endl;
+        }
+
     }
 }
 
@@ -134,8 +157,18 @@ void buscarEstudiante(string nombre[], double nota[], int cantidad){
             cout << "Nota: " << nota[i] << endl;
 
             encontrado = true;
-            break;
+
+            if(nota[i] >= 14){
+            cout << "Estado: APROBADO" << endl;
+        } 
+        else{
+            cout << "Estado: REPROBADO" << endl;
         }
+
+           break; 
+           
+        }
+
     }
 
     if(encontrado == false){
